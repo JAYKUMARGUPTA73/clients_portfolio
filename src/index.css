@@ -1,0 +1,33 @@
+/* In index.css or App.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+body {
+  @apply bg-primary text-white;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #3182ce; /* Tailwind blue-600 */
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #3182ce; /* Tailwind blue-600 */
+}
+#fractal-tree {
+  padding-bottom: 20px;
+}
+
+#fractal-tree .p5Canvas {
+  width: 250px !important;
+  height: 100% !important;
+}
+
+@media only screen and (max-width: 600px) {
+  #fractal-tree .p5Canvas {
+    width: 150px !important;
+    height: 100% !important;
+  }
+}
+
