@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const experiences = [
   {
@@ -31,7 +31,7 @@ const experiences = [
     period: "MAY 2021 - SEPT 2021",
     description: [
       "Developed and researched an NLP-based framework using state-of-the-art tools like Spacy and Stanza to facilitate the derivation of requirements from health data by leveraging syntactic dependencies, entity-recognition and rule-based match-making.",
-      "Application selected for DCS Research Award ($4,000) as part of the ”Visualizing Privacy Analysis Results” project led by Professor Marsha Chechik."
+      "Application selected for DCS Research Award ($4,000) as part of the ”Visualizing Privacy Analysis Results” project led by Professor Marsha Chechik.",
     ],
   },
   {
@@ -61,7 +61,7 @@ const Experience = () => {
   const [activeExperience, setActiveExperience] = useState(experiences[0]);
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.5 // Adjust as needed
+    threshold: 0.1,
   });
 
   // Effect to animate on navigation change
@@ -69,29 +69,32 @@ const Experience = () => {
     // Reset animation state when activeExperience changes
     if (ref.current) {
       ref.current.style.opacity = 0;
-      ref.current.style.transform = 'translateY(50px)';
+      ref.current.style.transform = "translateY(50px)";
       setTimeout(() => {
         ref.current.style.opacity = 1;
-        ref.current.style.transform = 'translateY(0)';
-      }, 100); // Adjust delay as needed
+        ref.current.style.transform = "translateY(0)";
+      }, 100);
     }
-  }, [activeExperience]); // Run effect whenever activeExperience changes
+  }, [activeExperience]);
 
   return (
-    <div id="experience" className="min-h-screen bg-gradient-to-b from-[#2fe8980f] to-[#0c422a00] pl-24 text-[#8892b0] flex">
-      <div className="w-full md:w-1/2 bg-gradient-to-b from-[#0c422a00] to-[#0c422a00] ">
-      <div className="mb-10 flex items-center">
-            <h2 className="text-5xl text-[#8892b0] font-bold text-gray-100">
-              / experience
-            </h2>
-            <div className="w-1/4 h-[2px] mt-4 bg-[#233554] ml-4"></div>
-          </div>
-        <ul className="space-y-4 pl-8 md:pl-4">
+    <div
+      id="experience"
+      className="bg-gradient-to-b from-[#2fe8980f] to-[#0c422a00] pl-7 md:pl-2 lg:pl-28 text-[#8892b0] flex flex-wrap"
+    >
+      <div className="w-full md:w-1/3 lg:w-1/3 bg-gradient-to-b from-[#0c422a00] to-[#0c422a00]">
+        <div className="mb-10 flex items-center">
+          <h2 className="text-3xl md:text-5xl text-[#8892b0] font-bold text-gray-100">
+            /experience
+          </h2>
+          <div className="w-1/4 h-[2px] mt-4 bg-[#233554] ml-4"></div>
+        </div>
+        <ul className="space-y-4 pl-4 md:pl-0">
           {experiences.map((exp) => (
             <li
               key={exp.id}
               onClick={() => setActiveExperience(exp)}
-              className={`cursor-pointer p-4 text-md pl-16 leading-3 font-medium flex items-center ${
+              className={`cursor-pointer p-2 md:p-4 text-base md:text-md pl-8 md:pl-16 leading-6 font-medium flex items-center ${
                 activeExperience.id === exp.id
                   ? "text-accent"
                   : "hover:bg-[#112240]"
@@ -102,30 +105,32 @@ const Experience = () => {
           ))}
         </ul>
       </div>
-      <div className="w-full md:w-3/4 p-8">
-        <div ref={ref} className="my-24">
+      <div className="w-full md:w-2/3 lg:w-2/3 p-6 md:p-8">
+        <div ref={ref} className="my-12">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="text-3xl font-bold mb-2">
+            <div className="text-xl md:text-3xl font-bold mb-2">
               <span>{activeExperience.company.split("@")[0]}</span>
-              <span className="text-accent"> @{activeExperience.company.split("@")[1]}</span>
+              <span className="text-accent">
+                {" "}
+                @{activeExperience.company.split("@")[1]}
+              </span>
             </div>
-            <div className="text-xl mb-10">
-              {activeExperience.period}
-            </div>
+            <div className="text-lg md:text-xl mb-6">{activeExperience.period}</div>
             {Array.isArray(activeExperience.description) ? (
-              <ul className="list-disc text-xl font-medium max-w-30 leading-10 list-inside space-y-2">
+              <ul className="list-disc text-lg md:text-xl font-medium max-w-full leading-8 list-inside space-y-3">
                 {activeExperience.description.map((desc, index) => (
                   <li key={index} className="list-none">
-                    <span className="text-accent mr-2">▹</span>{desc}
+                    <span className="text-accent mr-2">▹</span>
+                    {desc}
                   </li>
                 ))}
               </ul>
             ) : (
-              <div>{activeExperience.description}</div>
+              <div className="text-lg md:text-xl">{activeExperience.description}</div>
             )}
           </motion.div>
         </div>

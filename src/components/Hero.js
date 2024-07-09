@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import FractalTree from '../components/FractleTree';
+// import FractalTree from '../components/FractalTree';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
@@ -25,10 +25,9 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className=' h-64 w-64 ml-64'>
+          <div className="h-48 md:h-64 w-48 md:w-64 mx-auto mb-4">
             {/* <FractalTree/> */}
-            <img src='/paperfly1.gif'/>
-            
+            <img src='/paperfly1.gif' className="h-full w-full object-cover" alt="Fractal Tree Animation" />
           </div>
           {showTypingEffect && (
             <TypingEffect text="hi, Bijay Tamang here. |" />
@@ -40,7 +39,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <span className="block mb-2 text-5xl text-[#8892b0]">I create stuff sometimes.</span>
+          <span className="block mb-2 text-3xl md:text-5xl text-[#8892b0]">I create stuff sometimes.</span>
           <span className="block">
             I'm a software engineer from Toronto, Canada. I'm fascinated by large-scale, high-impact products and contributed to major feature launches in industry-leading services as well as apps that have 100M+ installs.
           </span>
@@ -53,7 +52,7 @@ const Hero = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <FontAwesomeIcon icon={faEnvelope} className='font-xl '/>
+          <FontAwesomeIcon icon={faEnvelope} className="text-xl md:text-3xl" />
           &nbsp;&nbsp;Say Hi
         </motion.a>
 
@@ -110,7 +109,7 @@ const TypingEffect = ({ text }) => {
   // Function to wrap the specified word in a span with accent color and increased font size
   const highlightWord = (fullText, wordToHighlight) => {
     const regex = new RegExp(`\\b${wordToHighlight}\\b`, 'gi');
-    const highlightedText = fullText.replace(regex, `<span class="text-accent text-7xl">${wordToHighlight}</span>`);
+    const highlightedText = fullText.replace(regex, `<span class="text-accent md:text-7xl sm:text-3xl">${wordToHighlight}</span>`);
     return { __html: highlightedText };
   };
 
